@@ -4,7 +4,7 @@ export const PROJECTS = [
     title: 'Aethel Spirits',
     description: 'Premium distillation identity system and digital storefront. Focused on heavy typography and clean product photography.',
     tags: ['Brand Identity', 'Industrial Design', 'React'],
-    image: 'https://picsum.photos/seed/aethel/800/600',
+    image: '/images/projects/aethel_spirits.png',
     link: '#',
   },
   {
@@ -12,7 +12,7 @@ export const PROJECTS = [
     title: 'Chronos Vault',
     description: 'Editorial archive for archival fashion. Features a complex filtering system and interactive timeline.',
     tags: ['Interactive', 'Fashion', 'Next.js'],
-    image: 'https://picsum.photos/seed/chronos/800/600',
+    image: '/images/projects/chronos_vault.png',
     link: '#',
   },
   {
@@ -20,7 +20,7 @@ export const PROJECTS = [
     title: 'L\'Horizon',
     description: 'Bespoke fragrance shop experience with emotional scent mapping and user personas integration.',
     tags: ['E-Commerce', 'User Experience', 'Three.js'],
-    image: 'https://picsum.photos/seed/horizon/800/600',
+    image: '/images/projects/l_horizon.png',
     link: '#',
   },
   {
@@ -28,7 +28,7 @@ export const PROJECTS = [
     title: 'Data Dashboard X',
     description: 'Real-time monitoring system for industrial hardware. Built with technical rigour and accessibility in mind.',
     tags: ['System Design', 'D3.js', 'Dashboard'],
-    image: 'https://picsum.photos/seed/databoard/800/600',
+    image: '/images/projects/data_dashboard.png',
     link: '#',
   }
 ];
