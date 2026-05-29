@@ -27,7 +27,7 @@ export function Navbar() {
         ${navItems.map((item) => `
           <a 
             href="${item.href}"
-            class="label-micro transition-colors router-link ${currentPath === item.href ? 'text-brand-accent' : 'hover:text-brand-accent'}"
+            class="nav-link router-link ${currentPath === item.href ? 'nav-link-active' : 'nav-link-inactive'}"
           >
             ${item.name}
           </a>

@@ -1,6 +1,6 @@
 export function Hero() {
   return `
-    <section class="relative min-height-[90vh] flex flex-col justify-center px-6 pt-32 pb-12 lg:pt-40 lg:pb-32 overflow-hidden" id="hero">
+    <section class="hero-section" id="hero">
       <div class="max-w-7xl mx-auto w-full animate-reveal">
         <div class="mb-12">
           <span class="label-micro text-brand-accent mb-6 block">
@@ -9,9 +9,9 @@ export function Hero() {
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 mb-24">
-          <div class="p-6 border border-ui-border bg-card-bg/80 backdrop-blur-sm lg:p-6 max-w-sm">
+          <div class="hero-description-card">
              <span class="label-micro opacity-40 mb-2 block">Mission Statement</span>
-             <p class="text-[11px] md:text-xs text-brand-ink/60 leading-relaxed font-medium uppercase tracking-wider">
+             <p class="hero-description-text">
                Multidisciplinary creative technologist focused on elevating luxury brands through minimalist visual storytelling and precise interaction.
              </p>
           </div>

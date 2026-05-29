@@ -33,7 +33,23 @@ export function createLabViewer(container, modelUrl) {
   camera.position.z = 5;
 
   let currentModel = null;
+  let wireframeActive = false;
   const loader = new GLTFLoader();
+
+  const applyWireframe = (model, active) => {
+    if (!model) return;
+    model.traverse((child) => {
+      if (child.isMesh && child.material) {
+        if (Array.isArray(child.material)) {
+          child.material.forEach(m => {
+            m.wireframe = active;
+          });
+        } else {
+          child.material.wireframe = active;
+        }
+      }
+    });
+  };
 
   const loadModel = (url) => {
     // Show technical loader info
@@ -57,6 +73,9 @@ export function createLabViewer(container, modelUrl) {
       currentModel.position.x = -center.x * scale;
       currentModel.position.y = -center.y * scale;
       currentModel.position.z = -center.z * scale;
+
+      // Apply wireframe state if currently enabled
+      applyWireframe(currentModel, wireframeActive);
 
       scene.add(currentModel);
       container.removeChild(loaderEl);
@@ -93,6 +112,11 @@ export function createLabViewer(container, modelUrl) {
     },
     updateModel: (newUrl) => {
        loadModel(newUrl);
-    }
+    },
+    setWireframe: (active) => {
+      wireframeActive = active;
+      applyWireframe(currentModel, wireframeActive);
+    },
+    isWireframe: () => wireframeActive
   };
 }

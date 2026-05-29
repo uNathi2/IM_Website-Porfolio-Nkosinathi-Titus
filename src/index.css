@@ -2,63 +2,135 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
+/* 
+================================================================================
+  1. SYSTEM STYLE DESIGN SYSTEM & VARIABLES
+================================================================================
+  This section exposes raw CSS variables that control the aesthetic signature of 
+  the command-center layout. Edit these values directly to tweak your theme!
+*/
+
 @theme {
+  /* Typography Configuration */
   --font-sans: "Helvetica Neue", Helvetica, "Roboto", Arial, sans-serif;
   --font-mono: "Roboto Mono", monospace;
   --font-display: "Dirtyline 36daysoftype 2022", sans-serif;
   --font-brand: "Dirtyline 36daysoftype 2022", sans-serif;
 
-  --color-brand-bg: #050505;
-  --color-brand-ink: #f0f0f0;
-  --color-brand-accent: #FF5500; /* Vibrant International Orange */
-  --color-card-bg: #0a0a0a;
-  --color-ui-border: #1a1a1a;
-  --cursor-cross: #FF5500;
+  /* Color Palette Controls: Modify these to change the overall branding! */
+  --color-brand-bg: #050505;              /* The abyss dark outer canvas background */
+  --color-brand-ink: #f0f0f0;             /* Standard clean-white text color */
+  --color-brand-accent: #FF5500;          /* Vibrant International Orange accent color */
+  --color-card-bg: #0a0a0a;               /* Distinct terminal module container background */
+  --color-ui-border: #1a1a1a;             /* Subtle grid segment lines */
+  --cursor-cross: #FF5500;                /* Color of the custom tactical crosshair */
 }
 
+/* 
+================================================================================
+  2. BASE LAYER OVERRIDES
+================================================================================
+*/
 @layer base {
   * {
+    /* Enforces custom cursor throughout the application */
     cursor: none !important;
   }
+  
   body {
     @apply font-sans antialiased bg-brand-bg text-brand-ink;
+    background-image: radial-gradient(rgba(255, 85, 0, 0.03) 1px, transparent 0);
+    background-size: 24px 24px; /* Soft tactical micro-dots in background */
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display tracking-tighter text-white uppercase;
   }
 
+  /* Keeps layout centered on large ultra-wide monitors without looking stretched or lonely */
   .max-w-7xl {
     @apply lg:max-w-4xl xl:max-w-4xl 2xl:max-w-3xl transition-all duration-500 mx-auto;
   }
 }
 
+/* 
+================================================================================
+  3. INTERACTIVE CORNER / GLOW EFFECTS
+================================================================================
+*/
+
+/* Tactfully outlines elegant outline-only bold typographic headers */
 .outline-text {
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
   color: transparent;
+  transition: -webkit-text-stroke 0.3s ease;
 }
 
-.marquee-container {
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
-  overflow: hidden;
-  white-space: nowrap;
-  position: relative;
+.outline-text:hover {
+  -webkit-text-stroke: 1px var(--color-brand-accent);
 }
 
-.marquee-content {
-  display: inline-block;
-  padding-left: 100%;
-  animation: marquee 120s linear infinite;
-  will-change: transform;
+/* 
+================================================================================
+  4. HUD OVERLAYS & SCI-FI CRT ANIMATIONS
+================================================================================
+*/
+
+/* CRT radial shadow to darken corners of display like a legacy monitor */
+.crt-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.4) 100%);
+  pointer-events: none;
+  z-index: 100;
 }
 
-@keyframes marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-100%); }
+/* Horizontal retro scanning line moving infinitely vertically across screen */
+.scanline {
+  width: 100%;
+  height: 100px;
+  z-index: 5;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 85, 0, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
+  opacity: 0.1;
+  position: fixed;
+  bottom: 0%;
+  left: 0;
+  pointer-events: none;
+  animation: scanline 6s linear infinite;
 }
 
-/* Custom Grid System Utility */
+@keyframes scanline {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100vh); }
+}
+
+/* Immersive screen flickering, adding analogue warmth to design */
+.flicker {
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.9; }
+  15% { opacity: 0.97; }
+  25% { opacity: 0.95; }
+  30% { opacity: 0.98; }
+  50% { opacity: 0.96; }
+  70% { opacity: 1; }
+  100% { opacity: 0.97; }
+}
+
+/* 
+================================================================================
+  5. LAYOUT & GRID UTILITY STYLES
+================================================================================
+*/
+
+/* Standard 12-column grid structure for HUD design layout */
 .dashboard-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -73,12 +145,6 @@
   @apply font-mono text-[9px] uppercase tracking-widest text-brand-ink/30 font-bold;
 }
 
-.accent-line {
-  height: 1px;
-  background: linear-gradient(to right, var(--color-brand-accent), transparent);
-  width: 100%;
-}
-
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -88,13 +154,17 @@
   scrollbar-width: none;
 }
 
-/* Scroll-based animations support */
-@layer utilities {
-  .animate-reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
+/* 
+================================================================================
+  6. CUSTOM TAILWIND UTILITY EXTENSIONS
+================================================================================
+*/
+
+/* Fade-in reveal animations when navigating pages */
+@utility animate-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes reveal {
@@ -104,7 +174,116 @@
   }
 }
 
-/* Custom Cursor */
+/* Tactical Corner borders on modules */
+@utility tech-border {
+  position: relative;
+  border: 1px solid var(--color-ui-border);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: 10px;
+    height: 10px;
+    border-top: 2px solid var(--color-brand-accent);
+    border-left: 2px solid var(--color-brand-accent);
+    transition: all 0.3s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid var(--color-brand-accent);
+    border-right: 2px solid var(--color-brand-accent);
+    transition: all 0.3s ease;
+  }
+}
+
+/* 
+================================================================================
+  7. SPECIFIC GRAPHICAL COMPONENT STYLES
+================================================================================
+*/
+.section-container {
+  @apply px-6 py-24 bg-brand-bg lg:px-24;
+}
+
+.section-header {
+  @apply flex items-end justify-between mb-12 border-b border-ui-border pb-12 lg:mb-24;
+}
+
+.footer-section {
+  @apply px-6 py-16 bg-brand-bg md:px-12 lg:px-24 border-t border-white/5;
+}
+
+.footer-link {
+  @apply text-xs opacity-60 hover:opacity-100 transition-opacity;
+}
+
+.hero-section {
+  @apply pt-32 pb-24 px-6 lg:px-24 lg:pt-48 lg:pb-32 overflow-hidden;
+}
+
+.hero-title {
+  @apply text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-display font-black text-white leading-[0.85] mb-12 mix-blend-difference;
+}
+
+.hero-description-card {
+  @apply p-6 border border-ui-border bg-card-bg/80 backdrop-blur-sm lg:p-6 max-w-sm;
+}
+
+.hero-description-text {
+  @apply text-[11px] md:text-xs text-brand-ink/60 leading-relaxed font-medium uppercase tracking-wider;
+}
+
+.project-card {
+  @apply relative animate-reveal;
+}
+
+.project-image-container {
+  @apply relative aspect-[4/3] overflow-hidden bg-card-bg tech-border transition-all duration-500;
+}
+
+.group:hover {
+  & .project-image-container {
+    border-color: var(--color-brand-accent);
+  }
+}
+
+.project-image {
+  @apply w-full h-full object-cover grayscale transition-all duration-700 opacity-80;
+}
+
+.group:hover {
+  & .project-image {
+    filter: grayscale(0%);
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.nav-link {
+  @apply text-[10px] font-mono tracking-[0.2em] transition-all duration-300 hover:text-brand-accent uppercase;
+}
+
+.nav-link-active {
+  @apply text-brand-accent;
+}
+
+.nav-link-inactive {
+  @apply text-brand-ink/40;
+}
+
+/* 
+================================================================================
+  8. CUSTOM TACTICAL CURSOR VISUALS
+================================================================================
+*/
 #custom-cursor {
   position: fixed;
   width: 24px;
@@ -112,6 +291,7 @@
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: difference;
+  transition: transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 #custom-cursor::before,
@@ -135,85 +315,11 @@
   height: 100%;
 }
 
-.glass {
-  background: rgba(5, 5, 5, 0.7);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.scanline {
-  width: 100%;
-  height: 100px;
-  z-index: 5;
-  background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, rgba(255, 85, 0, 0.05) 50%, rgba(0, 0, 0, 0) 100%);
-  opacity: 0.1;
-  position: fixed;
-  bottom: 0%;
-  left: 0;
-  pointer-events: none;
-  animation: scanline 6s linear infinite;
-}
-
-@keyframes scanline {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-100vh); }
-}
-
-/* Technical CRT & Brutalist Effects */
-.crt-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.4) 100%);
-  pointer-events: none;
-  z-index: 100;
-}
-
-.flicker {
-  animation: flicker 0.15s infinite;
-}
-
-@keyframes flicker {
-  0% { opacity: 0.97; }
-  5% { opacity: 0.95; }
-  10% { opacity: 0.9; }
-  15% { opacity: 0.97; }
-  25% { opacity: 0.95; }
-  30% { opacity: 0.98; }
-  50% { opacity: 0.96; }
-  70% { opacity: 1; }
-  100% { opacity: 0.97; }
-}
-
-.tech-border {
-  position: relative;
-  border: 1px solid var(--color-ui-border);
-}
-
-.tech-border::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid var(--color-brand-accent);
-  border-left: 2px solid var(--color-brand-accent);
-}
-
-.tech-border::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  right: -2px;
-  width: 10px;
-  height: 10px;
-  border-bottom: 2px solid var(--color-brand-accent);
-  border-right: 2px solid var(--color-brand-accent);
-}
-
+/* 
+================================================================================
+  9. CUSTOM SMOOTH SCROLL DESIGN
+================================================================================
+*/
 ::-webkit-scrollbar {
   width: 4px;
 }
@@ -230,3 +336,15 @@
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-brand-accent);
 }
+
+/* 
+================================================================================
+  10. PAGE-SPECIFIC MODULAR IMPORTS
+================================================================================
+*/
+@import "./styles/pages/home.css";
+@import "./styles/pages/about.css";
+@import "./styles/pages/work.css";
+@import "./styles/pages/contact.css";
+@import "./styles/pages/lab.css";
+

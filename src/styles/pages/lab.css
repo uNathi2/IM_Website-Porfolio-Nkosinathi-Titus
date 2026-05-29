@@ -1,0 +1,25 @@
+/* Lab Page CSS Module */
+
+.lab-page-container {
+  @apply pt-32 pb-24 px-6 lg:px-24 lg:pt-48 lg:pb-32;
+}
+
+.lab-viewport-frame {
+  @apply relative bg-card-bg border border-ui-border aspect-video lg:aspect-square max-h-[600px] overflow-hidden;
+}
+
+.lab-model-btn {
+  @apply text-left p-6 border border-ui-border hover:border-brand-accent transition-all duration-300 bg-card-bg/20 cursor-crosshair;
+}
+
+.lab-model-btn.active {
+  @apply border-brand-accent bg-card-bg/45;
+}
+
+.lab-experiment-item {
+  @apply tech-border p-4 animate-reveal;
+}
+
+.lab-offline-alert {
+  @apply mt-32 p-12 border-2 border-dashed border-ui-border text-center bg-card-bg/10 backdrop-blur-sm;
+}

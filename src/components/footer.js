@@ -2,7 +2,7 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return `
-    <footer class="px-6 py-16 bg-brand-bg md:px-12 lg:px-24 border-t border-white/5">
+    <footer class="footer-section">
       <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-12">
         <div class="flex gap-24">
           <div class="flex flex-col gap-2">
@@ -12,8 +12,8 @@ export function Footer() {
           <div class="flex flex-col gap-2">
             <span class="text-[9px] uppercase tracking-widest font-bold opacity-30 text-white">Socials</span>
             <div class="flex gap-4">
-              <a href="#" class="text-xs opacity-60 hover:opacity-100 transition-opacity">Instagram</a>
-              <a href="#" class="text-xs opacity-60 hover:opacity-100 transition-opacity">Read.cv</a>
+              <a href="#" class="footer-link">Instagram</a>
+              <a href="#" class="footer-link">Read.cv</a>
             </div>
           </div>
         </div>

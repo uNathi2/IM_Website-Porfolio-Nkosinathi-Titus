@@ -4,9 +4,9 @@ export function ProjectGrid({ limit } = {}) {
   const displayedProjects = limit ? PROJECTS.slice(0, limit) : PROJECTS;
 
   return `
-    <section class="px-6 py-24 bg-brand-bg border-t border-ui-border lg:px-24" id="work">
+    <section class="section-container" id="work">
       <div class="max-w-7xl mx-auto">
-        <div class="flex items-end justify-between mb-24 border-b border-ui-border pb-12 lg:mb-32">
+        <div class="section-header">
           <div>
             <span class="label-micro text-brand-accent mb-4 block">PORTFOLIO // DATASET_01</span>
             <h2 class="text-5xl md:text-7xl lg:text-4xl xl:text-5xl font-display font-black text-white transition-all">RECORDS.</h2>
@@ -19,12 +19,12 @@ export function ProjectGrid({ limit } = {}) {
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 xl:gap-32">
           ${displayedProjects.map((project, index) => `
-            <div class="group relative animate-reveal" style="animation-delay: ${index * 0.1}s">
-              <div class="relative aspect-[4/3] overflow-hidden bg-card-bg tech-border group-hover:border-brand-accent transition-colors duration-500">
+            <div class="project-card group" style="animation-delay: ${index * 0.1}s">
+              <div class="project-image-container">
                 <img 
                   src="${project.image}" 
                   alt="${project.title}"
-                  class="w-full h-full object-cover grayscale opacity-30 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105"
+                  class="project-image"
                   referrerpolicy="no-referrer"
                 />
                 <div class="absolute inset-0 bg-brand-bg/60 group-hover:bg-transparent transition-colors duration-700 pointer-events-none"></div>

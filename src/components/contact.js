@@ -11,31 +11,31 @@ export function ContactSection() {
 
           <form class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10 text-left" id="contact-form">
             <div class="flex flex-col gap-3 group">
-              <label class="text-[9px] uppercase font-bold tracking-widest text-brand-ink/30 group-focus-within:text-brand-accent transition-colors">Your Name</label>
+              <label class="contact-form-label group-focus-within:text-brand-accent">Your Name</label>
               <input 
                 type="text" 
                 placeholder="Marcus Aurelius"
-                class="py-4 bg-transparent border-b border-white/10 focus:outline-none focus:border-brand-accent transition-colors placeholder:opacity-20 serif italic text-lg"
+                class="contact-form-input"
               />
             </div>
             <div class="flex flex-col gap-3 group">
-              <label class="text-[9px] uppercase font-bold tracking-widest text-brand-ink/30 group-focus-within:text-brand-accent transition-colors">Your Email</label>
+              <label class="contact-form-label group-focus-within:text-brand-accent">Your Email</label>
               <input 
                 type="email" 
                 placeholder="marcus@vane.studio"
-                class="py-4 bg-transparent border-b border-white/10 focus:outline-none focus:border-brand-accent transition-colors placeholder:opacity-20 serif italic text-lg"
+                class="contact-form-input"
               />
             </div>
             <div class="flex flex-col gap-3 md:col-span-2 group">
-              <label class="text-[9px] uppercase font-bold tracking-widest text-brand-ink/30 group-focus-within:text-brand-accent transition-colors">The Brief</label>
+              <label class="contact-form-label group-focus-within:text-brand-accent">The Brief</label>
               <textarea 
                 placeholder="How can we elevate your vision?"
                 rows="1"
-                class="py-4 bg-transparent border-b border-white/10 focus:outline-none focus:border-brand-accent transition-colors resize-none placeholder:opacity-20 serif italic text-lg"
+                class="contact-form-input resize-none"
               ></textarea>
             </div>
             <div class="md:col-span-2 mt-8">
-              <button type="submit" class="group w-full md:w-auto px-16 py-6 border border-brand-accent text-brand-accent font-serif italic text-xl hover:bg-brand-accent hover:text-black transition-all duration-500">
+              <button type="submit" class="contact-submit-btn">
                 INITIATE CONVERSATION
               </button>
             </div>

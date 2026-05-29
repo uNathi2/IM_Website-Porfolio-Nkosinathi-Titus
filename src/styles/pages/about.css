@@ -1,0 +1,29 @@
+/* About Page CSS Module */
+
+.about-page-container {
+  @apply pt-32 pb-24 lg:pt-48;
+}
+
+.about-hero-grid {
+  @apply flex flex-col lg:flex-row gap-24 lg:gap-32 items-start mb-40 lg:mb-56;
+}
+
+.about-title-block {
+  @apply lg:w-1/2;
+}
+
+.about-description-block {
+  @apply lg:w-1/2 pt-4;
+}
+
+.about-principle-quote {
+  @apply text-sm text-brand-ink/50 leading-relaxed font-mono italic border-l border-brand-accent/40 pl-6 py-1;
+}
+
+.about-card-section {
+  @apply px-6 py-24 bg-card-bg border-y border-ui-border lg:px-12;
+}
+
+.about-differentiator {
+  @apply p-6 border border-ui-border/50 bg-brand-bg hover:border-brand-accent/40 transition-colors duration-300;
+}

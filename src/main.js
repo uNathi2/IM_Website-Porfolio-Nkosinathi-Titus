@@ -132,6 +132,29 @@ function initPageLogic() {
 
     window._cleanupEffect = viewer.cleanup;
 
+    // Toggle Wireframe Mode Listener
+    const toggleWireframeBtn = document.getElementById('toggle-wireframe-btn');
+    if (toggleWireframeBtn) {
+      toggleWireframeBtn.addEventListener('click', () => {
+        const isActive = !viewer.isWireframe();
+        viewer.setWireframe(isActive);
+        
+        const statusText = document.getElementById('wireframe-status-text');
+        const statusDot = document.getElementById('wireframe-status-dot');
+        
+        if (statusText) statusText.innerText = isActive ? 'ON' : 'OFF';
+        if (statusDot) {
+          if (isActive) {
+            statusDot.classList.remove('bg-white/20');
+            statusDot.classList.add('bg-brand-accent', 'animate-pulse');
+          } else {
+            statusDot.classList.remove('bg-brand-accent', 'animate-pulse');
+            statusDot.classList.add('bg-white/20');
+          }
+        }
+      });
+    }
+
     document.querySelectorAll('.lab-model-select').forEach(btn => {
       btn.addEventListener('click', () => {
         const url = btn.dataset.url;

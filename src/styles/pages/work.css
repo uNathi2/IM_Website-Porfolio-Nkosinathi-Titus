@@ -1,0 +1,71 @@
+/* Work Page CSS Module */
+
+.work-page-container {
+  @apply pt-32 pb-24 px-6 lg:px-24 lg:pt-48 lg:pb-32;
+}
+
+.work-archive-header {
+  @apply flex items-center gap-4 mb-12 mt-48;
+}
+
+.work-table-wrapper {
+  @apply overflow-x-auto border border-ui-border bg-card-bg/10 backdrop-blur-sm;
+}
+
+.work-table {
+  @apply w-full text-left font-sans border-collapse;
+}
+
+.work-table-head-row {
+  @apply border-b border-ui-border text-brand-ink/40 uppercase text-[10px] tracking-widest font-mono font-bold;
+}
+
+.work-table-th {
+  @apply py-6 px-6 font-semibold select-none;
+}
+
+.work-table-tr {
+  @apply border-b border-ui-border/20 transition-colors duration-200 cursor-crosshair;
+}
+
+.work-table-tr:hover {
+  background-color: rgba(255, 85, 0, 0.02);
+}
+
+.work-table-td-year {
+  @apply py-6 px-6 opacity-30 font-mono text-xs transition-opacity duration-200;
+}
+
+.work-table-tr:hover .work-table-td-year {
+  opacity: 1;
+}
+
+.work-table-td-title {
+  @apply py-6 px-6 text-white font-medium transition-colors duration-200;
+}
+
+.work-table-tr:hover .work-table-td-title {
+  color: var(--color-brand-accent);
+}
+
+.work-table-td-agency {
+  @apply py-6 px-6 opacity-60 text-sm italic transition-opacity duration-200;
+}
+
+.work-table-tr:hover .work-table-td-agency {
+  opacity: 0.9;
+}
+
+.work-table-td-role {
+  @apply py-6 px-6;
+}
+
+.work-role-tag {
+  @apply text-[9px] uppercase tracking-widest text-brand-ink/50 px-2.5 py-1.5 border border-ui-border rounded transition-all duration-300;
+}
+
+.work-table-tr:hover .work-role-tag {
+  border-color: rgba(255, 85, 0, 0.4);
+  color: var(--color-brand-accent);
+}
+
