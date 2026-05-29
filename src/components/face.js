@@ -14,11 +14,12 @@ const FALLBACK_MODEL_URL = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/e
 const DitherShader = {
   uniforms: {
     'tDiffuse': { value: null },
-    'tSize': { value: new THREE.Vector2(256, 256) },
+    'tSize': { value: new THREE.Vector2(512, 512) },
     'palette': { value: [
-      new THREE.Vector3(0.02, 0.02, 0.02), // Shadows
-      new THREE.Vector3(0.33, 0.0, 1.0),    // Midtones (Purple)
-      new THREE.Vector3(1.0, 0.33, 0.0),    // Highlights (Orange)
+      new THREE.Vector3(0.015, 0.0, 0.035), // 0: Deep space purple (Shadows)
+      new THREE.Vector3(0.38, 0.0, 0.82),   // 1: Rich midtone purple (Cyber Violet)
+      new THREE.Vector3(0.72, 0.15, 1.0),   // 2: Radiant bright purple/lavender
+      new THREE.Vector3(1.0, 0.42, 0.0),    // 3: Vibrating accent highlight orange
     ]}
   },
   vertexShader: `
@@ -31,7 +32,7 @@ const DitherShader = {
   fragmentShader: `
     uniform sampler2D tDiffuse;
     uniform vec2 tSize;
-    uniform vec3 palette[3];
+    uniform vec3 palette[4];
     varying vec2 vUv;
 
     float luma(vec3 color) {
@@ -51,7 +52,7 @@ const DitherShader = {
     }
 
     void main() {
-      float pixelScale = 250.0;
+      float pixelScale = 400.0;
       vec2 p = floor(vUv * pixelScale) / pixelScale;
       vec4 texel = texture2D(tDiffuse, p);
       
@@ -63,13 +64,18 @@ const DitherShader = {
       float brightness = luma(texel.rgb);
       float threshold = bayer4x4(gl_FragCoord.xy / 2.0);
       vec3 finalColor;
-      if (brightness < 0.1 + (threshold * 0.1)) {
+      
+      // Highly detailed transition math across 4 palette colors
+      if (brightness < 0.12 + (threshold * 0.12)) {
         finalColor = palette[0];
-      } else if (brightness < 0.45 + (threshold * 0.2)) {
+      } else if (brightness < 0.40 + (threshold * 0.15)) {
         finalColor = palette[1];
-      } else {
+      } else if (brightness < 0.70 + (threshold * 0.18)) {
         finalColor = palette[2];
+      } else {
+        finalColor = palette[3];
       }
+      
       gl_FragColor = vec4(finalColor, texel.a);
     }
   `
@@ -97,7 +103,7 @@ export function createReactiveHead(container) {
   // Background Grid Plane (Enhanced)
   const gridGeom = new THREE.PlaneGeometry(200, 200, 100, 100);
   const gridMat = new THREE.MeshBasicMaterial({ 
-    color: 0x5500FF, 
+    color: 0x9D00FF, 
     wireframe: true, 
     transparent: true, 
     opacity: 0.05 
@@ -108,15 +114,19 @@ export function createReactiveHead(container) {
   gridMesh.position.z = -20;
   scene.add(gridMesh);
 
-  // Initial Placeholder Sphere
-  const sphereGeom = new THREE.SphereGeometry(2.5, 32, 32);
-  const sphereMat = new THREE.MeshPhongMaterial({ color: 0x888888, shininess: 100 });
+  // Initial Placeholder Sphere (Enhanced detail & material)
+  const sphereGeom = new THREE.SphereGeometry(2.5, 64, 64);
+  const sphereMat = new THREE.MeshStandardMaterial({ 
+    color: 0xdddddd, 
+    roughness: 0.2, 
+    metalness: 0.1 
+  });
   const placeholder = new THREE.Mesh(sphereGeom, sphereMat);
   mainGroup.add(placeholder);
 
   // Loading Ring (Subtle Animation)
   const ringGeom = new THREE.TorusGeometry(3.5, 0.05, 16, 100);
-  const ringMat = new THREE.MeshBasicMaterial({ color: 0x5500FF, wireframe: true, transparent: true, opacity: 0.5 });
+  const ringMat = new THREE.MeshBasicMaterial({ color: 0x9D00FF, wireframe: true, transparent: true, opacity: 0.5 });
   const loadingRing = new THREE.Mesh(ringGeom, ringMat);
   mainGroup.add(loadingRing);
 
@@ -133,8 +143,18 @@ export function createReactiveHead(container) {
       loadingRing.visible = false;
       isLoading = false;
       
-      const customMat = new THREE.MeshPhongMaterial({ color: 0xcccccc, shininess: 30 });
-      userModel.traverse((child) => { if (child.isMesh) child.material = customMat; });
+      const customMat = new THREE.MeshStandardMaterial({ 
+        color: 0xeeeeee, 
+        roughness: 0.35, 
+        metalness: 0.1 
+      });
+      userModel.traverse((child) => { 
+        if (child.isMesh) {
+          child.material = customMat;
+          // Calculate vertex normals for custom models to guarantee beautiful smooth shading
+          child.geometry.computeVertexNormals(); 
+        } 
+      });
       
       // Auto-scale and center
       const box = new THREE.Box3().setFromObject(userModel);
@@ -153,17 +173,23 @@ export function createReactiveHead(container) {
 
   loadModel(USER_MODEL_PATH);
 
-  // Lighting - Boosted for visibility
-  const spotLight = new THREE.SpotLight(0xffffff, 4);
-  spotLight.position.set(10, 10, 20);
-  spotLight.angle = 0.5;
-  scene.add(spotLight);
+  // Premium Multi-Directional Shading Lights
+  // High-contrast key directional light to sculpt the face structures
+  const keyLight = new THREE.DirectionalLight(0xffffff, 4.0);
+  keyLight.position.set(15, 15, 15);
+  scene.add(keyLight);
 
-  const fillLight = new THREE.PointLight(0x5500FF, 3);
-  fillLight.position.set(-15, 5, 10);
+  // Cyber purple fill light from the opposite lower angle
+  const fillLight = new THREE.DirectionalLight(0x9D00FF, 3.5);
+  fillLight.position.set(-15, -5, 10);
   scene.add(fillLight);
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+  // Luminescent orange rim light from behind to trace glowing contours of the 3D geometry
+  const rimLight = new THREE.DirectionalLight(0xff5500, 3.0);
+  rimLight.position.set(0, 5, -15);
+  scene.add(rimLight);
+
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
   scene.add(ambientLight);
 
   scene.background = null; 
