@@ -37,10 +37,9 @@ export const SKILLS = [
   { name: 'React / TypeScript', category: 'Frontend' },
   { name: 'Three.js / 3D Web', category: 'Frontend' },
   { name: 'Node.js / Express', category: 'Backend' },
-  { name: 'PostgreSQL', category: 'Backend' },
   { name: 'Figma / UI Design', category: 'Design' },
   { name: 'Motion Design', category: 'Design' },
-  { name: 'AWS / Cloud', category: 'Tools' },
+  { name: 'Blender/ 3D DESIGN', category: 'Tools' },
   { name: 'Git / CI-CD', category: 'Tools' },
 ];
 
