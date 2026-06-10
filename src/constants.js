@@ -1,73 +1,111 @@
+// =============================================================================
+//  constants.js — single source of truth for all site content
+//  Edit this file to update projects, skills, archive entries, and lab models.
+//  Nothing else needs to change when you add or edit content here.
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+//  PROJECTS — shown on Home (limit 2) and Work (all 4)
+//  image: drop your file into /public/images/projects/ and reference it here
+// -----------------------------------------------------------------------------
 export const PROJECTS = [
   {
-    id: '1',
-    title: 'Aethel Spirits',
-    description: 'Premium distillation identity system and digital storefront. Focused on heavy typography and clean product photography.',
-    tags: ['Brand Identity', 'Industrial Design', 'React'],
-    image: '/images/projects/aethel_spirits.png',
+    id: '01',
+    title: 'Spoken to Seen',
+    description:
+      'An immersive 3D animation created for the Wits Digital Dome — a full-dome projection environment. The piece translates spoken language into spatial visual narrative, exploring how sound becomes form across a 360° canvas.',
+    tags: ['3D Animation', 'Blender', 'After Effects', 'Digital Dome'],
+    discipline: '3D / Animation',
+    image: '/images/projects/Spoken_to_seen snapshot.png',
     link: '#',
+    year: '2025',
   },
   {
-    id: '2',
-    title: 'Chronos Vault',
-    description: 'Editorial archive for archival fashion. Features a complex filtering system and interactive timeline.',
-    tags: ['Interactive', 'Fashion', 'Next.js'],
-    image: '/images/projects/chronos_vault.png',
+    id: '02',
+    title: 'Aether Studio — Blob Font',
+    description:
+      'An experimental typography study pushing letterform boundaries through organic, liquid geometries. Each glyph was constructed in Adobe Illustrator as a standalone sculptural object, bridging type design and UI aesthetics.',
+    tags: ['Typography', 'Graphic Design', 'Adobe Illustrator', 'UI/UX'],
+    discipline: 'Graphic Design',
+    image: '/images/projects/Aether_Blob_Font.png',
     link: '#',
+    year: '2025',
   },
   {
-    id: '3',
-    title: 'L\'Horizon',
-    description: 'Bespoke fragrance shop experience with emotional scent mapping and user personas integration.',
-    tags: ['E-Commerce', 'User Experience', 'Three.js'],
-    image: '/images/projects/l_horizon.png',
+    id: '03',
+    title: 'Roses',
+    description:
+      'A piece from an ongoing series of audio-reactive generative artworks. Built in TouchDesigner, the visuals respond in real time to audio frequency data — translating sound amplitude and pitch into blooming, recursive motion graphics.',
+    tags: ['Generative Art', 'TouchDesigner', 'Audio-Reactive', 'Creative Coding'],
+    discipline: 'Creative Coding',
+    image: '/images/projects/Roses.png',
     link: '#',
+    year: '2024',
   },
   {
-    id: '4',
-    title: 'Data Dashboard X',
-    description: 'Real-time monitoring system for industrial hardware. Built with technical rigour and accessibility in mind.',
-    tags: ['System Design', 'D3.js', 'Dashboard'],
-    image: '/images/projects/data_dashboard.png',
+    id: '04',
+    title: 'SESB Poster',
+    description:
+      'A poster created in collaboration with an independent fashion brand. The design fuses TouchDesigner-generated visual texture with photographic composition to produce a high-impact campaign asset that sits at the intersection of fashion and generative media.',
+    tags: ['Poster Design', 'TouchDesigner', 'Photoshop', 'Fashion'],
+    discipline: 'Graphic Design',
+    image: '/images/projects/SESB_1.png',
     link: '#',
-  }
+    year: '2024',
+  },
 ];
 
+// -----------------------------------------------------------------------------
+//  SKILLS — shown on the About page capability grid
+// -----------------------------------------------------------------------------
 export const SKILLS = [
-  { name: 'React / TypeScript', category: 'Frontend' },
-  { name: 'Three.js / 3D Web', category: 'Frontend' },
-  { name: 'Node.js / Express', category: 'Backend' },
-  { name: 'Figma / UI Design', category: 'Design' },
-  { name: 'Motion Design', category: 'Design' },
-  { name: 'Blender/ 3D DESIGN', category: 'Tools' },
-  { name: 'Git / CI-CD', category: 'Tools' },
+  { name: 'Blender',            category: '3D / Animation' },
+  { name: 'After Effects',      category: '3D / Animation' },
+  { name: 'TouchDesigner',      category: 'Creative Coding' },
+  { name: 'p5.js',              category: 'Creative Coding' },
+  { name: 'Adobe Illustrator',  category: 'Graphic Design' },
+  { name: 'Photoshop',          category: 'Graphic Design' },
+  { name: 'Figma',              category: 'UI / UX' },
+  { name: 'Three.js',           category: 'Creative Coding' },
+  { name: 'HTML / CSS / JS',    category: 'Web Development' },
+  { name: 'CAD / 3D Modelling', category: '3D / Animation' },
 ];
 
+// -----------------------------------------------------------------------------
+//  ARCHIVE_PROJECTS — historical table on the Work page
+// -----------------------------------------------------------------------------
 export const ARCHIVE_PROJECTS = [
-  { year: '2025', title: 'Monocle OS', agency: 'Freelance', role: 'Design Lead' },
-  { year: '2024', title: 'Vanguard 3.0', agency: 'Uplink Studio', role: 'Developer' },
-  { year: '2024', title: 'Solaris LMS', agency: 'Internal', role: 'Architect' },
-  { year: '2023', title: 'Pioneer Portal', agency: 'Discovery', role: 'Frontend' },
-  { year: '2023', title: 'Eclipse Dashboard', agency: 'Freelance', role: 'Design' },
+  { year: '2025', title: 'Spoken to Seen',        agency: 'Wits Digital Dome', role: 'Director / 3D' },
+  { year: '2025', title: 'Aether Blob Font',       agency: 'Self-initiated',    role: 'Type Designer' },
+  { year: '2025', title: 'DIGA3008A Portfolio',    agency: 'Academic',          role: 'Design + Dev' },
+  { year: '2024', title: 'Roses',                  agency: 'Self-initiated',    role: 'Creative Coder' },
+  { year: '2024', title: 'SESB Campaign Poster',   agency: 'SESB (Fashion)',    role: 'Art Director' },
 ];
 
+// -----------------------------------------------------------------------------
+//  LAB_MODELS — 3D models loaded in the Experimental Lab viewer
+//  Add your own .glb files to /public/models/ and register them here
+// -----------------------------------------------------------------------------
 export const LAB_MODELS = [
-  { 
-    id: 'm1', 
-    name: 'Neural_Core_v1', 
+  {
+    id: 'm1',
+    name: 'Head_Model_v1',
+    url: '/models/Head v1.glb',
+    description:
+      'Primary reactive head model — rendered with a custom Bayer 4×4 dither shader and mouse-tracked rotation on the home canvas.',
+  },
+  {
+    id: 'm2',
+    name: 'Expressive_Robot',
     url: 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/models/gltf/RobotExpressive/RobotExpressive.glb',
-    description: 'Experimental bipedal architecture test. Focus on expressive joint constraints.'
+    description:
+      'Expressive bipedal rig used for joint-constraint experimentation and animation timing studies.',
   },
-  { 
-    id: 'm2', 
-    name: 'Vanguard_Statue', 
+  {
+    id: 'm3',
+    name: 'Nefertiti_Scan',
     url: 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/models/gltf/Nefertiti/Nefertiti.glb',
-    description: 'Digital preservation of classical form using high-fidelity photogrammetry.'
+    description:
+      'High-fidelity photogrammetry scan — reference for digital preservation workflows and surface topology study.',
   },
-  { 
-    id: 'm3', 
-    name: 'Titus_Helmet_Proto', 
-    url: 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/models/gltf/DamagedHelmet/glTF/DamagedHelmet.gltf',
-    description: 'Iterative prototyping for tactical visor integration. Testing complex PBR materials.'
-  }
 ];
