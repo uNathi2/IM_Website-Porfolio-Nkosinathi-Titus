@@ -7,8 +7,11 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 /**
  * CONFIGURATION FOR THE USER
  * Change USER_MODEL_PATH to point to your uploaded .glb or .gltf file.
+ * Path is relative — no leading slash — so GitHub Pages base path is applied.
+ * Rename your file to remove spaces: "Head v1.glb" → "Head_v1.glb"
  */
-const USER_MODEL_PATH = '/models/Head v1.glb'; 
+const BASE_URL = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
+const USER_MODEL_PATH = `${BASE_URL}models/Head_v1.glb`;
 const FALLBACK_MODEL_URL = 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/models/gltf/LeePerrySmith/LeePerrySmith.glb';
 
 const DitherShader = {
@@ -16,11 +19,11 @@ const DitherShader = {
     'tDiffuse': { value: null },
     'tSize': { value: new THREE.Vector2(512, 512) },
     'palette': { value: [
-      new THREE.Vector3(0.015, 0.0, 0.035), // 0: Deep space purple (Shadows)
-      new THREE.Vector3(0.38, 0.0, 0.82),   // 1: Rich midtone purple (Cyber Violet)
-      new THREE.Vector3(0.72, 0.15, 1.0),   // 2: Radiant bright purple/lavender
-      new THREE.Vector3(1.0, 0.42, 0.0),    // 3: Vibrating accent highlight orange
-    ]}
+        new THREE.Vector3(0.015, 0.0, 0.035), // 0: Deep space purple (Shadows)
+        new THREE.Vector3(0.38, 0.0, 0.82),   // 1: Rich midtone purple (Cyber Violet)
+        new THREE.Vector3(0.72, 0.15, 1.0),   // 2: Radiant bright purple/lavender
+        new THREE.Vector3(1.0, 0.42, 0.0),    // 3: Vibrating accent highlight orange
+      ]}
   },
   vertexShader: `
     varying vec2 vUv;
@@ -87,7 +90,7 @@ export function createReactiveHead(container) {
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: true });
-  renderer.setClearColor(0x000000, 0); 
+  renderer.setClearColor(0x000000, 0);
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(1);
   container.appendChild(renderer.domElement);
@@ -100,13 +103,13 @@ export function createReactiveHead(container) {
   const mainGroup = new THREE.Group();
   scene.add(mainGroup);
 
-  // Background Grid Plane (Enhanced)
+  // Background Grid Plane
   const gridGeom = new THREE.PlaneGeometry(200, 200, 100, 100);
-  const gridMat = new THREE.MeshBasicMaterial({ 
-    color: 0x9D00FF, 
-    wireframe: true, 
-    transparent: true, 
-    opacity: 0.05 
+  const gridMat = new THREE.MeshBasicMaterial({
+    color: 0x9D00FF,
+    wireframe: true,
+    transparent: true,
+    opacity: 0.05
   });
   const gridMesh = new THREE.Mesh(gridGeom, gridMat);
   gridMesh.rotation.x = -Math.PI / 2;
@@ -114,17 +117,17 @@ export function createReactiveHead(container) {
   gridMesh.position.z = -20;
   scene.add(gridMesh);
 
-  // Initial Placeholder Sphere (Enhanced detail & material)
+  // Initial Placeholder Sphere
   const sphereGeom = new THREE.SphereGeometry(2.5, 64, 64);
-  const sphereMat = new THREE.MeshStandardMaterial({ 
-    color: 0xdddddd, 
-    roughness: 0.2, 
-    metalness: 0.1 
+  const sphereMat = new THREE.MeshStandardMaterial({
+    color: 0xdddddd,
+    roughness: 0.2,
+    metalness: 0.1
   });
   const placeholder = new THREE.Mesh(sphereGeom, sphereMat);
   mainGroup.add(placeholder);
 
-  // Loading Ring (Subtle Animation)
+  // Loading Ring
   const ringGeom = new THREE.TorusGeometry(3.5, 0.05, 16, 100);
   const ringMat = new THREE.MeshBasicMaterial({ color: 0x9D00FF, wireframe: true, transparent: true, opacity: 0.5 });
   const loadingRing = new THREE.Mesh(ringGeom, ringMat);
@@ -134,7 +137,6 @@ export function createReactiveHead(container) {
   let isLoading = true;
   const loader = new GLTFLoader();
 
-  // Loading Logic
   const loadModel = (url) => {
     loader.load(url, (gltf) => {
       if (userModel) mainGroup.remove(userModel);
@@ -142,20 +144,19 @@ export function createReactiveHead(container) {
       placeholder.visible = false;
       loadingRing.visible = false;
       isLoading = false;
-      
-      const customMat = new THREE.MeshStandardMaterial({ 
-        color: 0xeeeeee, 
-        roughness: 0.35, 
-        metalness: 0.1 
+
+      const customMat = new THREE.MeshStandardMaterial({
+        color: 0xeeeeee,
+        roughness: 0.35,
+        metalness: 0.1
       });
-      userModel.traverse((child) => { 
+      userModel.traverse((child) => {
         if (child.isMesh) {
           child.material = customMat;
-          // Calculate vertex normals for custom models to guarantee beautiful smooth shading
-          child.geometry.computeVertexNormals(); 
-        } 
+          child.geometry.computeVertexNormals();
+        }
       });
-      
+
       // Auto-scale and center
       const box = new THREE.Box3().setFromObject(userModel);
       const size = box.getSize(new THREE.Vector3());
@@ -163,7 +164,7 @@ export function createReactiveHead(container) {
       const scale = 5 / maxDim;
       userModel.scale.set(scale, scale, scale);
       userModel.position.set(0, -size.y * scale / 2, 0);
-      
+
       mainGroup.add(userModel);
     }, undefined, (err) => {
       console.warn('User model not found at:', url, '. Using fallback.');
@@ -173,18 +174,15 @@ export function createReactiveHead(container) {
 
   loadModel(USER_MODEL_PATH);
 
-  // Premium Multi-Directional Shading Lights
-  // High-contrast key directional light to sculpt the face structures
+  // Lights
   const keyLight = new THREE.DirectionalLight(0xffffff, 4.0);
   keyLight.position.set(15, 15, 15);
   scene.add(keyLight);
 
-  // Cyber purple fill light from the opposite lower angle
   const fillLight = new THREE.DirectionalLight(0x9D00FF, 3.5);
   fillLight.position.set(-15, -5, 10);
   scene.add(fillLight);
 
-  // Luminescent orange rim light from behind to trace glowing contours of the 3D geometry
   const rimLight = new THREE.DirectionalLight(0xff5500, 3.0);
   rimLight.position.set(0, 5, -15);
   scene.add(rimLight);
@@ -192,7 +190,7 @@ export function createReactiveHead(container) {
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
   scene.add(ambientLight);
 
-  scene.background = null; 
+  scene.background = null;
 
   camera.position.z = 12;
 
@@ -207,7 +205,7 @@ export function createReactiveHead(container) {
     const frameId = requestAnimationFrame(animate);
     targetX += (mouseX - targetX) * 0.05;
     targetY += (mouseY - targetY) * 0.05;
-    
+
     mainGroup.rotation.y = targetX * 0.5;
     mainGroup.rotation.x = -targetY * 0.3;
     mainGroup.position.y = Math.sin(Date.now() * 0.001) * 0.15;
@@ -217,9 +215,9 @@ export function createReactiveHead(container) {
       loadingRing.rotation.x += 0.02;
       placeholder.scale.setScalar(1 + Math.sin(Date.now() * 0.01) * 0.1);
     }
-    
+
     gridMesh.position.z = -20 + Math.sin(Date.now() * 0.0005) * 5;
-    
+
     composer.render();
     return frameId;
   }

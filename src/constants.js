@@ -1,22 +1,20 @@
 // =============================================================================
 //  constants.js — single source of truth for all site content
-//  Edit this file to update projects, skills, archive entries, and lab models.
-//  Nothing else needs to change when you add or edit content here.
+//  BASE_URL is injected by Vite at build time — handles both local dev
+//  (/) and GitHub Pages (/IM_Website-Porfolio-Nkosinathi-Titus/) correctly
 // =============================================================================
 
-// -----------------------------------------------------------------------------
-//  PROJECTS — shown on Home (limit 2) and Work (all 4)
-//  image: drop your file into /public/images/projects/ and reference it here
-// -----------------------------------------------------------------------------
+const BASE = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : import.meta.env.BASE_URL + "/";
+
 export const PROJECTS = [
   {
     id: '01',
     title: 'Spoken to Seen',
     description:
-      'An immersive 3D animation created for the Wits Digital Dome — a full-dome projection environment. The piece translates spoken language into spatial visual narrative, exploring how sound becomes form across a 360° canvas.',
+        'An immersive 3D animation created for the Wits Digital Dome — a full-dome projection environment. The piece translates spoken language into spatial visual narrative, exploring how sound becomes form across a 360° canvas.',
     tags: ['3D Animation', 'Blender', 'After Effects', 'Digital Dome'],
     discipline: '3D / Animation',
-    image: '/images/projects/Spoken_to_seen snapshot.png',
+    image: `${BASE}images/projects/Spoken_to_seen_snapshot.png`,
     link: '#',
     year: '2025',
   },
@@ -24,10 +22,10 @@ export const PROJECTS = [
     id: '02',
     title: 'Aether Studio — Blob Font',
     description:
-      'An experimental typography study pushing letterform boundaries through organic, liquid geometries. Each glyph was constructed in Adobe Illustrator as a standalone sculptural object, bridging type design and UI aesthetics.',
+        'An experimental typography study pushing letterform boundaries through organic, liquid geometries. Each glyph was constructed in Adobe Illustrator as a standalone sculptural object, bridging type design and UI aesthetics.',
     tags: ['Typography', 'Graphic Design', 'Adobe Illustrator', 'UI/UX'],
     discipline: 'Graphic Design',
-    image: 'projects/Aether_Blob_Font.png',
+    image: `${BASE}images/projects/Aether_Blob_Font.png`,
     link: '#',
     year: '2025',
   },
@@ -35,10 +33,10 @@ export const PROJECTS = [
     id: '03',
     title: 'Roses',
     description:
-      'A piece from an ongoing series of audio-reactive generative artworks. Built in TouchDesigner, the visuals respond in real time to audio frequency data — translating sound amplitude and pitch into blooming, recursive motion graphics.',
+        'A piece from an ongoing series of audio-reactive generative artworks. Built in TouchDesigner, the visuals respond in real time to audio frequency data — translating sound amplitude and pitch into blooming, recursive motion graphics.',
     tags: ['Generative Art', 'TouchDesigner', 'Audio-Reactive', 'Creative Coding'],
     discipline: 'Creative Coding',
-    image: 'images/projects/Roses.png',
+    image: `${BASE}images/projects/Roses.png`,
     link: '#',
     year: '2024',
   },
@@ -46,10 +44,10 @@ export const PROJECTS = [
     id: '04',
     title: 'SESB Poster',
     description:
-      'A poster created in collaboration with an independent fashion brand. The design fuses TouchDesigner-generated visual texture with photographic composition to produce a high-impact campaign asset that sits at the intersection of fashion and generative media.',
+        'A poster created in collaboration with an independent fashion brand. The design fuses TouchDesigner-generated visual texture with photographic composition to produce a high-impact campaign asset that sits at the intersection of fashion and generative media.',
     tags: ['Poster Design', 'TouchDesigner', 'Photoshop', 'Fashion'],
     discipline: 'Graphic Design',
-    image: 'images/projects/SESB_1.png',
+    image: `${BASE}images/projects/SESB_1.png`,
     link: '#',
     year: '2024',
   },
@@ -84,28 +82,27 @@ export const ARCHIVE_PROJECTS = [
 
 // -----------------------------------------------------------------------------
 //  LAB_MODELS — 3D models loaded in the Experimental Lab viewer
-//  Add your own .glb files to /public/models/ and register them here
 // -----------------------------------------------------------------------------
 export const LAB_MODELS = [
   {
     id: 'm1',
     name: 'Head_Model_v1',
-    url: '/models/Head v1.glb',
+    url: `${BASE}models/Head_v1.glb`,
     description:
-      'Primary reactive head model — rendered with a custom Bayer 4×4 dither shader and mouse-tracked rotation on the home canvas.',
+        'Primary reactive head model — rendered with a custom Bayer 4×4 dither shader and mouse-tracked rotation on the home canvas.',
   },
   {
     id: 'm2',
     name: 'Expressive_Robot',
     url: 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/models/gltf/RobotExpressive/RobotExpressive.glb',
     description:
-      'Expressive bipedal rig used for joint-constraint experimentation and animation timing studies.',
+        'Expressive bipedal rig used for joint-constraint experimentation and animation timing studies.',
   },
   {
     id: 'm3',
     name: 'Nefertiti_Scan',
     url: 'https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/models/gltf/Nefertiti/Nefertiti.glb',
     description:
-      'High-fidelity photogrammetry scan — reference for digital preservation workflows and surface topology study.',
+        'High-fidelity photogrammetry scan — reference for digital preservation workflows and surface topology study.',
   },
 ];
