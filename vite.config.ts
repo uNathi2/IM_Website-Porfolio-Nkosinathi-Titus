@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [tailwindcss()],
+  base:'IM_Website-Porfolio-Nkosinathi-Titus',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
