@@ -64,7 +64,7 @@ export function HomePage() {
             <div>
               <span class="label-micro text-brand-accent mb-4 block">Who I Am</span>
               <h2 class="text-3xl md:text-4xl font-display font-black text-white leading-tight mb-6">
-                THIRD-YEAR.<br/>WITS UNIVERSITY.<br/>INTERACTIVE MEDIA.
+                FOURTH-YEAR.<br/>WITS UNIVERSITY.<br/>INTERACTIVE MEDIA.
               </h2>
               <p class="text-sm text-brand-ink/50 leading-relaxed max-w-md">
                 I work at the boundary where design thinking meets technical execution —
