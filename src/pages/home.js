@@ -82,7 +82,7 @@ export function HomePage() {
               ${[
                 { stat: '5', label: 'Disciplines' },
                 { stat: '4+', label: 'Projects shipped' },
-                { stat: '3rd', label: 'Year of study' },
+                { stat: '4th', label: 'Year of study' },
                 { stat: 'JHB', label: 'Based in' },
               ].map(({ stat, label }) => `
                 <div class="data-cell tech-border">

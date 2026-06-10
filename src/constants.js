@@ -75,11 +75,11 @@ export const SKILLS = [
 //  ARCHIVE_PROJECTS — historical table on the Work page
 // -----------------------------------------------------------------------------
 export const ARCHIVE_PROJECTS = [
-  { year: '2025', title: 'Spoken to Seen',        agency: 'Wits Digital Dome', role: 'Director / 3D' },
+  { year: '2026', title: 'Spoken to Seen',        agency: 'Wits Digital Dome', role: 'Director / 3D' },
   { year: '2025', title: 'Aether Blob Font',       agency: 'Self-initiated',    role: 'Type Designer' },
   { year: '2025', title: 'DIGA3008A Portfolio',    agency: 'Academic',          role: 'Design + Dev' },
-  { year: '2024', title: 'Roses',                  agency: 'Self-initiated',    role: 'Creative Coder' },
-  { year: '2024', title: 'SESB Campaign Poster',   agency: 'SESB (Fashion)',    role: 'Art Director' },
+  { year: '2025', title: 'Roses',                  agency: 'Self-initiated',    role: 'Creative Coder' },
+  { year: '2025', title: 'SESB Campaign Poster',   agency: 'SESB (Fashion)',    role: 'Art Director' },
 ];
 
 // -----------------------------------------------------------------------------

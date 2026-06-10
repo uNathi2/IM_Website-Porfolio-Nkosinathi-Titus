@@ -44,9 +44,9 @@ export function AboutPage() {
             <div class="grid grid-cols-2 gap-4 mt-10">
               ${[
                 { label: 'Institution', value: 'Wits University' },
-                { label: 'Year', value: '3rd Year — DIGA3008A' },
+                { label: 'Year', value: '4th Year — BA Digital Arts' },
                 { label: 'Based', value: 'Johannesburg, ZA' },
-                { label: 'Status', value: 'Open to Opportunities' },
+                { label: 'Status', value: 'Currently An Intern at Bupila and Music in Africa' },
               ].map(({ label, value }) => `
                 <div class="border border-ui-border p-4 bg-card-bg/30">
                   <span class="label-micro opacity-30 block mb-1">${label}</span>
