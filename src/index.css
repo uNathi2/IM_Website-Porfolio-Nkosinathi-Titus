@@ -18,7 +18,7 @@
   --font-brand: "Dirtyline 36daysoftype 2022", sans-serif;
 
   /* Color Palette Controls: Modify these to change the overall branding! */
-  --color-brand-bg: #444444;              /* The abyss dark outer canvas background */
+  --color-brand-bg: #010101;              /* The abyss dark outer canvas background */
   --color-brand-ink: #f0f0f0;             /* Standard clean-white text color */
   --color-brand-accent: #FF5500;          /* Vibrant International Orange accent color */
   --color-card-bg: #0a0a0a;               /* Distinct terminal module container background */
